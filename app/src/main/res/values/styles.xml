@@ -7,5 +7,14 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style  name="Theme.SplashActivity" parent="@android:style/Theme.NoTitleBar">
+        <!-- 是否允许有标题栏 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 提示背景图片 -->
+        <item name="android:windowBackground">@mipmap/ic_launcher</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 是否允许背景灰暗 -->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 
 </resources>
