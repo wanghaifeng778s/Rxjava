@@ -11,10 +11,20 @@ android {
         versionName "1.0"
     }
     buildTypes {
-        release {
+
+        same{
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        release {
+            buildConfigField "boolean", "IS_DEBUG", "false"
+            buildConfigField "String", "HOST", "\"http://api.anawin.com\""
+        }
+        debug{
+            buildConfigField "boolean", "IS_DEBUG", "true"
+            buildConfigField "String", "HOST", "\"http://api.test.anawin.com\""
+        }
+
     }
 }
 
@@ -34,4 +44,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile "com.zhy:autolayout:1.4.5"
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'//没有使用特殊Header，可以不加这行
 }
