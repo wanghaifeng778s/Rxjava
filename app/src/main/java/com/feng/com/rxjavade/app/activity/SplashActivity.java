@@ -26,9 +26,6 @@ public class SplashActivity extends BaseActivity{
                 .subscribe(aLong -> {
                     goToMainActivity();
                 });
-//        new Handler().postDelayed(() -> {
-//            goToMainActivity();
-//        },2000);
     }
 
     private void goToMainActivity() {
