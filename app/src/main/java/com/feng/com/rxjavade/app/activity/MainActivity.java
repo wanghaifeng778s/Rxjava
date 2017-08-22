@@ -4,15 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.feng.com.rxjavade.R;
+import com.feng.com.rxjavade.app.adapter.MyFragmentAdapter;
+import com.feng.com.rxjavade.app.fragment.HomePageFragment;
+import com.feng.com.rxjavade.app.fragment.PersonalPageFragment;
+import com.feng.com.rxjavade.app.fragment.VideoPageFragment;
 import com.feng.com.rxjavade.base.BaseActivity;
+import com.voler.cutlass.FragmentFactory;
 
 import java.util.ArrayList;
 
@@ -26,6 +26,7 @@ public class MainActivity extends BaseActivity {
     ViewPager vpHorizontalNtb;
     @Bind(R.id.ntb_horizontal)
     NavigationTabBar ntbHorizontal;
+    private MyFragmentAdapter fragmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,37 +38,14 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initUI() {
-
-
-        View view_home = LayoutInflater.from(getBaseContext()).inflate(R.layout.fragment_home_page, null, false);
-        View view_video = LayoutInflater.from(getBaseContext()).inflate(R.layout.fragment_video_page, null, false);
-        View view_personal= LayoutInflater.from(getBaseContext()).inflate(R.layout.fragment_personal_page, null, false);
-        ArrayList<View> fragment_list = new ArrayList<>();
-        fragment_list.add(view_home);
-        fragment_list.add(view_video);
-        fragment_list.add(view_personal);
-        vpHorizontalNtb.setAdapter(new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return 3;
-            }
-
-            @Override
-            public boolean isViewFromObject(View view, Object object) {
-                return view.equals(object);
-            }
-
-            @Override
-            public void destroyItem(ViewGroup container, int position, Object object) {
-                ((ViewPager) container).removeView((View) object);
-            }
-
-            @Override
-            public Object instantiateItem(ViewGroup container, int position) {
-                container.addView(fragment_list.get(position));
-                return fragment_list.get(position);
-            }
-        });
+        fragmentAdapter = new MyFragmentAdapter(getSupportFragmentManager());
+        HomePageFragment homePageFragment= FragmentFactory.createHomePageFragment("12",9);
+        VideoPageFragment videoPageFragment=FragmentFactory.createVideoPageFragment("3","2");
+        PersonalPageFragment personalPageFragment=FragmentFactory.createPersonalPageFragment("11","wer");
+        fragmentAdapter.addFragment(homePageFragment);
+        fragmentAdapter.addFragment(videoPageFragment);
+        fragmentAdapter.addFragment(personalPageFragment);
+        vpHorizontalNtb.setAdapter(fragmentAdapter);
         final String[] colors = getResources().getStringArray(R.array.default_preview);
         ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         models.add(

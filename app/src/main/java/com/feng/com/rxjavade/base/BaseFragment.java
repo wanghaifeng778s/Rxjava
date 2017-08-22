@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,8 +20,9 @@ import com.trello.rxlifecycle.components.support.RxFragment;
  * Created by WHF.Javas on 2017/8/21.
  */
 
-public abstract class BaseFragment extends RxFragment {
+public abstract class BaseFragment extends RxFragment implements View.OnTouchListener {
     protected Activity mActivity;
+    private View rootView;
     /**
      * 获得全局的，防止使用getActivity()为空
      * @param context
@@ -33,10 +35,23 @@ public abstract class BaseFragment extends RxFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = LayoutInflater.from(mActivity).inflate(getLayoutId(), container, false);
-        initView(view, savedInstanceState);
-        return view;
+        if (rootView == null) {
+            rootView = initView(inflater, container, savedInstanceState);
+        }
+
+        rootView.setOnTouchListener(this);
+        return rootView;
     }
+
+    protected View updateInitView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(getLayout(), container, false);
+    }
+
+    protected int getLayout() {
+        throw new NullPointerException("layout is null,you must override getLayout");
+    }
+
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -104,20 +119,25 @@ public abstract class BaseFragment extends RxFragment {
     }
 
     /**
-     * 该抽象方法就是 onCreateView中需要的layoutID
+     * 老版本方法，不建议再重写他返回布局，建议重写getLayout()
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
      * @return
      */
-    protected abstract int getLayoutId();
-
-    /**
-     * 该抽象方法就是 初始化view
-     * @param view
-     * @param savedInstanceState
-     */
-    protected abstract void initView(View view, Bundle savedInstanceState);
+    @Deprecated
+    protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return updateInitView(inflater, container, savedInstanceState);
+    }
 
     /**
      * 执行数据的加载
      */
     protected abstract void initData();
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return true;
+    }
 }

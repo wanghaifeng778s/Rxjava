@@ -5,22 +5,31 @@ import android.view.View;
 
 import com.feng.com.rxjavade.R;
 import com.feng.com.rxjavade.base.BaseFragment;
+import com.voler.cutlass.Cutlass;
+import com.voler.cutlass.annotation.InjectField;
 
 /**
  * Created by WHF.Javas on 2017/8/21.
  */
 
 public class VideoPageFragment extends BaseFragment {
+
+    @InjectField
+    String id;
+
+    @InjectField
+    String position;
+
     @Override
-    protected int getLayoutId() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Cutlass.inject(this);
+    }
+
+    @Override
+    protected int getLayout() {
         return R.layout.fragment_video_page;
     }
-
-    @Override
-    protected void initView(View view, Bundle savedInstanceState) {
-
-    }
-
     @Override
     protected void initData() {
 
