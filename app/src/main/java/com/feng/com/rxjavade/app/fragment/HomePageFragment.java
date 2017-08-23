@@ -23,8 +23,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.internal.schedulers.SchedulerLifecycle;
 import rx.schedulers.Schedulers;
 
 /**
@@ -47,6 +47,7 @@ public class HomePageFragment extends BaseFragment implements OnRefreshListener,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Cutlass.inject(this);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -84,6 +85,7 @@ public class HomePageFragment extends BaseFragment implements OnRefreshListener,
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        EventBus.getDefault().unregister(this);
     }
 
     @Override

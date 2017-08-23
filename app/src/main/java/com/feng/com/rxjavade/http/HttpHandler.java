@@ -17,10 +17,10 @@ public class HttpHandler {
         Request request = chain.request();
         request = request.newBuilder()
                 .header("Server-Version", "2.0")
-                .header("User-Token", "")
+                .header("UserBuilder-Token", "")
                 .header("App-Version", "")
                 .header("Access-Token", "")
-                .header("User-Agent", "Android")
+                .header("UserBuilder-Agent", "Android")
                 .header("Unit-Type", Build.MODEL)
                 .header("Sys-Version", Build.VERSION.RELEASE+"")
                 .build();
