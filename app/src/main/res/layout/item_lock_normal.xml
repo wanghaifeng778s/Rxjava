@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_white_4dp"
+    android:orientation="vertical">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/iv_image"
+        android:layout_width="match_parent"
+        android:layout_height="186dp"
+        fresco:placeholderImage="@drawable/avatar_news"
+        fresco:roundBottomLeft="false"
+        fresco:roundBottomRight="false"
+        fresco:roundedCornerRadius="4dp" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:lines="2"
+        android:ellipsize="end"
+        android:text="اfdsafsdلتحالف: الوحدات الكردية تخترق البلدة القديمة بالرقة"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:lines="3"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="وأضاف التحالف في بيان الليلة الماضية أن قوات التحالف دعمت تقدم قوات سوريا الديمقراطية في الجزء الأكثر تحصينا من الرقة عبر ف  fdaslfjdakl fds fdsa fsafd fda fd fda fda fdas fda fda "
+        android:textColor="@color/black"
+        android:textSize="14dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_read_more"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginBottom="17dp"
+            android:layout_marginLeft="14dp"
+            android:src="@drawable/icon_readmore" />
+
+        <TextView
+            android:id="@+id/tv_read_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/iv_read_more"
+            android:text="أقراء المزيد"
+            android:textColor="#516cb8"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/iv_comment_count"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="18dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/icon_comment" />
+
+
+        <TextView
+            android:id="@+id/tv_comment_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@id/iv_comment_count"
+            android:text="27"
+            android:textColor="#ff473d"
+            android:textSize="14dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

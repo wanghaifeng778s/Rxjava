@@ -23,6 +23,7 @@ import com.trello.rxlifecycle.components.support.RxFragment;
 public abstract class BaseFragment extends RxFragment implements View.OnTouchListener {
     protected Activity mActivity;
     private View rootView;
+    protected FragmentActivity mContext;
     /**
      * 获得全局的，防止使用getActivity()为空
      * @param context
@@ -32,6 +33,13 @@ public abstract class BaseFragment extends RxFragment implements View.OnTouchLis
         super.onAttach(context);
         this.mActivity = (Activity)context;
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mContext = getActivity();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

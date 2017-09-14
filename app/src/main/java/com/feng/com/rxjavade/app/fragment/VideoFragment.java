@@ -9,17 +9,16 @@ import com.voler.cutlass.Cutlass;
 import com.voler.cutlass.annotation.InjectField;
 
 /**
- * Created by WHF.Javas on 2017/8/22.
+ * Created by WHF.Javas on 2017/8/21.
  */
 
-public class PersonalPageFragment extends BaseFragment {
+public class VideoFragment extends BaseFragment {
 
     @InjectField
     String id;
 
     @InjectField
     String position;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,9 +28,8 @@ public class PersonalPageFragment extends BaseFragment {
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_personal_page;
+        return R.layout.fragment_video_page;
     }
-
     @Override
     protected void initData() {
 

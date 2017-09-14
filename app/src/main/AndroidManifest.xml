@@ -1,15 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.feng.com.rxjavade" >
+    package="com.feng.com.rxjavade"
+    android:installLocation="internalOnly">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <!--用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!--用于访问网络，网络定位需要上网-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--显示系统窗口-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!--读取系统底层日志-->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!--震动-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!--允许读写系统设置项-->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!--允许程序禁用键盘锁-->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
+        android:name=".app.MyApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".app.activity.MainActivity" >
+        <activity android:name=".app.activity.MainActivity"
+            android:launchMode="singleTask">
         </activity>
 
         <activity android:name=".app.activity.SplashActivity"
@@ -19,6 +48,54 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".lock.MyLockScreenActivity"
+            android:exported="false"
+            android:taskAffinity="com.onemena.lock"
+            android:excludeFromRecents="true"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
+
+        <activity android:name=".lock.MyLockScreenTwoActivity"
+            android:exported="false"
+            android:taskAffinity="com.onemena.lock"
+            android:excludeFromRecents="true"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
+
+        <service android:name=".lock.LockService" android:process=":process1"/>
+        <receiver android:name=".lock.LockReceiver" android:process=":process1"/>
+
+        <service android:name=".lock.LocalService" android:process=":process2"/>
+        <receiver android:name=".lock.LockReceiver_" android:process=":process2"/>
+
+        <receiver android:name=".lock.LockReceiver_start"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+                <action android:name="android.intent.action.ACTION_USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <category android:name="android.intent.category.HOME"/>
+            </intent-filter>
+        </receiver>
+
+
+        <!--常驻通知提醒 -->
+        <receiver
+            android:name=".receiver.AL_BroadcastReceiver"
+            android:exported="true">
+            <intent-filter android:priority="999999999">
+                <action android:name="${applicationId}.AL_NOTIFICATION" />
+            </intent-filter>
+        </receiver>
+
+
 
 
         <meta-data

@@ -7,96 +7,51 @@ import java.util.List;
  */
 
 public class DocsBean {
+
     /**
      * comment_count : 0
-     * categ_name : مشاهير
+     * categ_name :  مشاهير
      * firstName : الجرس
-     * userPhoto : http://www.arabsada.com/uploads/profile_photos/593a62fd80135.jpg
+     * userPhoto : http: //www.arabsada.com/uploads/profile_photos/593a62fd80135.jpg
      * create_time : 20170816152930
-     * img_url : ["http://src.mysada.com/sada/file/jpg/220_144_sada12625168151502886573.jpg","http://src.mysada.com/sada/file/jpg/220_144_sada18592132071502886574.jpg","http://src.mysada.com/sada/file/jpg/220_144_sada5918938801502886576.jpg"]
+     * img_url : ["http://n.sinaimg.cn/translate/20170912/J6WG-fykufii1168692.jpg","http://src.mysada.com/sada/file/jpg/220_144_sada18592132071502886574.jpg","http://src.mysada.com/sada/file/jpg/220_144_sada5918938801502886576.jpg"]
      * dType : n
-     * shareUrl : http://share.anawin.com/share/1469977
-     * id : 1469977
-     * title : هكذا علقت شيرين رضا على زواج طليقها عمرو دياب من صديقتها دينا الشربيني
+     * shareUrl : http: //share.anawin.com/share/1469977
+     *  id : 1469977
+     * title :  当过高校院长、曾在安徽任职32年的他，任贵州省委政法委书记
      * recomId : 067d05607a0c41bdb4a2977b72436665
-     * video_time : 1:10
-     * like : 0
-     * dislike : 0
-     * video_url : utR4ao-S70s
+     * video_time : 1: 10
+     *  like : 0
+     *  dislike : 0
+     * video_url :  utR4ao-S70s
      * total_view : 71
+     * content : 也就是说，7月由安徽省委常委、秘书长同岗转任贵州省委常委、秘书长的唐承沛，已接班谌贻琴兼任省委政法委书记。谌贻琴9月6日已任贵州省委副书记、代省长。据了解，唐承沛还曾担任过合肥工业大学人事处处长、安徽农业技术师范学院院长等职
      */
 
     private String comment_count;
     private String categ_name;
     private String firstName;
     private String userPhoto;
-    private String create_time;
+    private long create_time;
     private String dType;
     private String shareUrl;
     private String id;
     private String title;
     private String recomId;
     private String video_time;
-    private String like;
-    private String dislike;
+    private int like;
+    private int dislike;
     private String video_url;
-    private String total_view;
-    private List<String> img_url;
+    private int total_view;
+    private String content;
+    private java.util.List<String> img_url;
 
-    public String getComment_count() {
-        return comment_count;
-    }
-
-    public void setComment_count(String comment_count) {
-        this.comment_count = comment_count;
-    }
-
-    public String getCateg_name() {
-        return categ_name;
-    }
-
-    public void setCateg_name(String categ_name) {
-        this.categ_name = categ_name;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getUserPhoto() {
-        return userPhoto;
-    }
-
-    public void setUserPhoto(String userPhoto) {
-        this.userPhoto = userPhoto;
-    }
-
-    public String getCreate_time() {
-        return create_time;
-    }
-
-    public void setCreate_time(String create_time) {
-        this.create_time = create_time;
-    }
-
-    public String getDType() {
+    public String getdType() {
         return dType;
     }
 
-    public void setDType(String dType) {
+    public void setdType(String dType) {
         this.dType = dType;
-    }
-
-    public String getShareUrl() {
-        return shareUrl;
-    }
-
-    public void setShareUrl(String shareUrl) {
-        this.shareUrl = shareUrl;
     }
 
     public String getId() {
@@ -131,19 +86,19 @@ public class DocsBean {
         this.video_time = video_time;
     }
 
-    public String getLike() {
+    public int getLike() {
         return like;
     }
 
-    public void setLike(String like) {
+    public void setLike(int like) {
         this.like = like;
     }
 
-    public String getDislike() {
+    public int getDislike() {
         return dislike;
     }
 
-    public void setDislike(String dislike) {
+    public void setDislike(int dislike) {
         this.dislike = dislike;
     }
 
@@ -155,12 +110,20 @@ public class DocsBean {
         this.video_url = video_url;
     }
 
-    public String getTotal_view() {
+    public int getTotal_view() {
         return total_view;
     }
 
-    public void setTotal_view(String total_view) {
+    public void setTotal_view(int total_view) {
         this.total_view = total_view;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public List<String> getImg_url() {
@@ -169,5 +132,61 @@ public class DocsBean {
 
     public void setImg_url(List<String> img_url) {
         this.img_url = img_url;
+    }
+
+    public String getComment_count() {
+        return comment_count;
+    }
+
+    public void setComment_count(String comment_count) {
+        this.comment_count = comment_count;
+    }
+
+    public String getCateg_name() {
+        return categ_name;
+    }
+
+    public void setCateg_name(String categ_name) {
+        this.categ_name = categ_name;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getUserPhoto() {
+        return userPhoto;
+    }
+
+    public void setUserPhoto(String userPhoto) {
+        this.userPhoto = userPhoto;
+    }
+
+    public long getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(long create_time) {
+        this.create_time = create_time;
+    }
+
+    public String getDType() {
+        return dType;
+    }
+
+    public void setDType(String dType) {
+        this.dType = dType;
+    }
+
+    public String getShareUrl() {
+        return shareUrl;
+    }
+
+    public void setShareUrl(String shareUrl) {
+        this.shareUrl = shareUrl;
     }
 }

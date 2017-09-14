@@ -8,7 +8,11 @@ public class Api {
     private static CommonService commonService;
     public static CommonService getComApi(){
         if (commonService == null) {
-            commonService=HttpService.create(CommonService.class);
+            synchronized (Api.class){
+                if (commonService == null){
+                    commonService=HttpService.create(CommonService.class);
+                }
+            }
         }
         return commonService;
     }
