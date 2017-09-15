@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="150dp"
+    android:paddingBottom="150dp"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/item_lock_normal"/>
+    </FrameLayout>
+    <ImageView
+        android:id="@+id/img_close"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/iconrefresh_notic"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>

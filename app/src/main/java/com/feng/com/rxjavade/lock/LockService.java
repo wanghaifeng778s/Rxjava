@@ -12,6 +12,7 @@ import android.util.Log;
 import com.feng.com.rxjavade.app.config.AppConfig;
 import com.feng.com.rxjavade.utils.BroadCastUtil;
 import com.feng.com.rxjavade.utils.SpUtil;
+import com.feng.com.rxjavade.utils.WindowUtils;
 
 import static com.feng.com.rxjavade.app.config.AppConfig.AL_NOTIFICATION;
 import static com.feng.com.rxjavade.app.config.SPKey.LOCK_SWITCH;
@@ -78,6 +79,8 @@ public class LockService extends Service {
                         LockIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(LockIntent);
                     }
+                }else {
+                    WindowUtils.init(context);
                 }
             }
         }

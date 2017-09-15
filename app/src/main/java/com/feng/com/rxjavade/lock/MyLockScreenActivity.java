@@ -21,10 +21,15 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.feng.com.rxjavade.R;
 import com.feng.com.rxjavade.app.bean.DocsBean;
 import com.feng.com.rxjavade.base.BaseActivity;
+import com.feng.com.rxjavade.http.Api;
 import com.feng.com.rxjavade.utils.GetNotifityDataArtUtil;
+import com.feng.com.rxjavade.utils.GetPhoneInfoUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by WHF.Javas on 2017/9/11.
@@ -89,6 +94,7 @@ public class MyLockScreenActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
+                item= position;
             }
 
             @Override
@@ -99,7 +105,6 @@ public class MyLockScreenActivity extends BaseActivity {
         JSONArray localAtr = GetNotifityDataArtUtil.getLocalAtr(this);
         String s = localAtr.toJSONString();
         List<DocsBean> docs = JSONArray.parseArray(s, DocsBean.class);
-        mList.addAll(0, docs);
         mList.addAll(0, docs);
         vpNews.setAdapter(new MyAdapter(this));
         vpNews.setCurrentItem(0);//jkhfs
@@ -167,6 +172,7 @@ public class MyLockScreenActivity extends BaseActivity {
                         .setAutoPlayAnimations(true)
                         .build();
                 load.setController(draweeController);
+                loadMore();
             }else{
                 view = View.inflate(mContext, R.layout.item_lock_normal, null);
                 SimpleDraweeView ivImage = (SimpleDraweeView) view.findViewById(R.id.iv_image);
@@ -174,8 +180,11 @@ public class MyLockScreenActivity extends BaseActivity {
                 TextView tvContent = (TextView) view.findViewById(R.id.tv_content);
                 TextView tvCommentCount = (TextView) view.findViewById(R.id.tv_comment_count);
                 DocsBean docsBean = mList.get(position);
-                String image = docsBean.getImg_url().get(0);
-                ivImage.setImageURI(Uri.parse(image));
+                if (docsBean.getImg_url().size()>0&&docsBean.getImg_url()!=null) {
+                    String image = docsBean.getImg_url().get(0);
+                    ivImage.setImageURI(Uri.parse(image));
+                }
+
                 tvTitle.setText(docsBean.getTitle());
                 tvContent.setText(docsBean.getContent());
                 tvCommentCount.setText(docsBean.getComment_count());
@@ -184,4 +193,24 @@ public class MyLockScreenActivity extends BaseActivity {
             return view; // 返回该view对象，作为key
         }
     }
+
+    private void loadMore() {
+        Api.getComApi().getNewsList(GetPhoneInfoUtil.INSTANCE.getAndroidId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(newsItemBean -> {
+                    List<DocsBean> docs = newsItemBean.getDocs();
+                    for (DocsBean doc : docs) {
+                        if ("n".equals(doc.getDType())) {
+                            List<String> img_url = doc.getImg_url();
+                            if (img_url != null && img_url.size() > 0) {
+                                mList.add(doc);
+                            }
+                        }
+                    }
+                    vpNews.setAdapter(new MyAdapter(this));
+                    vpNews.setCurrentItem(item);//jkhfs
+                },Throwable::printStackTrace);
+    }
+
 }
