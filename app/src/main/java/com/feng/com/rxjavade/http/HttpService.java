@@ -25,11 +25,15 @@ public class HttpService {
 
     private static void getRetrofit(){
         Timber.plant(new Timber.DebugTree());
-        OkHttpClient client=new OkHttpClient.Builder()
-                .readTimeout(TIME_OUT,TimeUnit.SECONDS)
+        OkHttpClient client= null;
+        client = new OkHttpClient.Builder()
+                .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(chain -> new HttpHandler().onRequest(chain))
                 .addNetworkInterceptor(new RequestInterceptor(new HttpHandler()))
+//                    .sslSocketFactory(MySSLSocketFactory.getSSLSocketFactory())
+                .sslSocketFactory(MySSLSocketFactory.getSSLSocketFactoryT())
+                .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
                 .build();
         retrofit=new Retrofit.Builder()
                 .baseUrl(BASE_URL)

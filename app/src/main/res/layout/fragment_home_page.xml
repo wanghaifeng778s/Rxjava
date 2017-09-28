@@ -12,4 +12,16 @@
         android:textSize="30dp"
         android:textColor="@color/qmui_config_color_white"
         android:text="Home"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="@color/black"
+        android:text="获取数据"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:id="@+id/click"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/context"/>
 </com.zhy.autolayout.AutoLinearLayout>

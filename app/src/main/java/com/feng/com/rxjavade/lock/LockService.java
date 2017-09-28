@@ -5,16 +5,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.feng.com.rxjavade.app.config.AppConfig;
-import com.feng.com.rxjavade.utils.BroadCastUtil;
 import com.feng.com.rxjavade.utils.SpUtil;
-import com.feng.com.rxjavade.utils.WindowUtils;
 
-import static com.feng.com.rxjavade.app.config.AppConfig.AL_NOTIFICATION;
 import static com.feng.com.rxjavade.app.config.SPKey.LOCK_SWITCH;
 import static com.feng.com.rxjavade.app.config.SPKey.LOCK_TYPE;
 
@@ -43,11 +38,11 @@ public class LockService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (AppConfig.AL_NOTIFICATION_RE.equals(intent.getAction())){
-            new Handler().postDelayed(() -> {
-                BroadCastUtil.postBroadcast(this,AL_NOTIFICATION);
-            }, 4000);
-        }
+//        if (AppConfig.AL_NOTIFICATION_RE.equals(intent.getAction())){
+//            new Handler().postDelayed(() -> {
+//                BroadCastUtil.postBroadcast(this,AL_NOTIFICATION);
+//            }, 4000);
+//        }
         return START_STICKY;
     }
 
@@ -74,13 +69,7 @@ public class LockService extends Service {
                         Intent LockIntent = new Intent(context, MyLockScreenActivity.class);
                         LockIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(LockIntent);
-                    }else {
-                        Intent LockIntent = new Intent(context, MyLockScreenTwoActivity.class);
-                        LockIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(LockIntent);
                     }
-                }else {
-                    WindowUtils.init(context);
                 }
             }
         }

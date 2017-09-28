@@ -10,18 +10,29 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        mykey {
+            storeFile file('src/main/java/MyKeyStore.jks')
+            storePassword 'wang123456'
+            keyAlias 'key0'
+            keyPassword 'wang123456'
+        }
     }
     buildTypes {
-
-        same{
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
         release {
+
+            minifyEnabled true
             buildConfigField "boolean", "IS_DEBUG", "false"
             buildConfigField "String", "HOST", "\"http://api.anawin.com\""
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.mykey
         }
         debug{
+            signingConfig signingConfigs.mykey
+            minifyEnabled false
             buildConfigField "boolean", "IS_DEBUG", "true"
             buildConfigField "String", "HOST", "\"http://api.test.anawin.com\""
         }
@@ -32,6 +43,23 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                //这里修改apk文件名
+                def fileName = "MyAPP-code${defaultConfig.versionCode}-version${defaultConfig.versionName}.apk"
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
+    repositories {
+        jcenter()
+        flatDir {
+            dirs 'aars'
+        }
+    }
+
 }
 
 dependencies {
@@ -40,7 +68,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:24.0.0'
-    compile'com.android.support:support-v4:24.0.0'
+    compile 'com.android.support:support-v4:24.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile 'io.reactivex:rxjava:1.1.0'
@@ -53,27 +81,22 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.zhy:autolayout:1.4.5'
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
+//    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+//    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
     //没有使用特殊Header，可以不加这行
     retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.3.0'
     compile 'com.voler:cutlass-annotation:1.0.0'
     annotationProcessor 'com.voler:cutlass-compiler:1.0.0'
     compile 'devlight.io:navigationtabbar:1.2.5'
     compile 'com.jakewharton.timber:timber:4.5.1'
-    // 在 API < 14 上的机器支持 WebP 时，需要添加
-    compile 'com.facebook.fresco:animated-base-support:0.12.0'
-    // 支持 GIF 动图，需要添加
-    compile 'com.facebook.fresco:animated-gif:0.12.0'
-    // 支持 WebP （静态图+动图），需要添加
-    compile 'com.facebook.fresco:animated-webp:0.12.0'
-    compile 'com.facebook.fresco:webpsupport:0.12.0'
-    // 仅支持 WebP 静态图，需要添加
-    compile 'com.facebook.fresco:webpsupport:0.12.0'
     compile 'com.facebook.fresco:fresco:0.12.0'
-
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.qmuiteam:qmui:1.0.0'
     compile 'com.alibaba:fastjson:1.2.10'
-    compile project(path: ':LibMarsdaemon')
+//    compile project(path: ':LibMarsdaemon')
+//    compile project(':smartpopupwindow')
+//    compile files('libs/sun.misc.BASE64Decoder.jar')
+
+    compile(name: 'apidata-release', ext: 'aar')
+    compile 'com.android.support:multidex:1.0.1'
 }

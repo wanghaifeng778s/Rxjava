@@ -5,16 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never"
-            android:id="@+id/list_data"
-            />
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
 </com.zhy.autolayout.AutoLinearLayout>

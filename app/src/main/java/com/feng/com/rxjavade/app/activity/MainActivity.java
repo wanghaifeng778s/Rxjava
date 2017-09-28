@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 
+import com.api2data.Retrofits;
+import com.api2data.greenbean.User;
 import com.feng.com.rxjavade.R;
 import com.feng.com.rxjavade.app.adapter.MyFragmentAdapter;
 import com.feng.com.rxjavade.app.config.SPKey;
@@ -25,6 +27,9 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import devlight.io.library.ntb.NavigationTabBar;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.feng.com.rxjavade.app.config.AppConfig.AL_NOTIFICATION;
 
@@ -49,6 +54,18 @@ public class MainActivity extends BaseActivity {
                 BroadCastUtil.postBroadcast(this,AL_NOTIFICATION);
             }, 5000);
         }
+//        Mkit.inIt(this);
+        Retrofits.getService(this).getUserInfo("en").enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
     }
 
     private void initUI() {
@@ -120,6 +137,8 @@ public class MainActivity extends BaseActivity {
     public static void startActivity(Activity activity) {
         Intent intent = new Intent(activity, MainActivity.class);
         activity.startActivity(intent);
+
+//        Retrofits.getADService()
     }
 
     @Override
